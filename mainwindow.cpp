@@ -1,14 +1,17 @@
 #include "mainwindow.h"
-#include "ui_mainwindow.h"
 
-MainWindow::MainWindow(QWidget *parent) :
-    QMainWindow(parent),
-    ui(new Ui::MainWindow)
-{
-    ui->setupUi(this);
-}
+#include <QVBoxLayout>
 
-MainWindow::~MainWindow()
+
+
+MainWindow::MainWindow(QWidget *parent)
+    : QMainWindow(parent)
 {
-    delete ui;
+    QWidget *w = new QWidget(this);
+    this->setCentralWidget(w);
+
+    QVBoxLayout *mainLayout = new QVBoxLayout(w);
+
+    helloLabel = new QLabel("Hello!", w);
+    mainLayout->addWidget(helloLabel);
 }
