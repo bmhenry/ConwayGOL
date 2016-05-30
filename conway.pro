@@ -13,11 +13,18 @@ TEMPLATE = app
 
 
 SOURCES += main.cpp\
-        mainwindow.cpp
+        mainwindow.cpp \
+    canvaswidget.cpp \
+    gamelogic.cpp \
+    board.cpp
 
-HEADERS  += mainwindow.h
+HEADERS  += mainwindow.h \
+    canvaswidget.h \
+    gamelogic.h \
+    board.h
 
 FORMS    +=
 
 DISTFILES += \
+    Rules.txt \
     .travis.yml

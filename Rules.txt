@@ -1,0 +1,6 @@
+Each cell has 8 neighbors (horizontal, vertical, and diagonal)
+
+1. Any live cell with under two live neighbors dies (under-population)
+2. Any live cell with two or three live neighbors lives
+3. Any live cell with more than three live neighbors dies (over-population)
+4. Any empty cell with exactly three neighbors becomes live

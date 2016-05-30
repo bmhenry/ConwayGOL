@@ -3,6 +3,11 @@
 
 #include <QMainWindow>
 #include <QLabel>
+#include <QMenuBar>
+#include <QAction>
+
+#include "canvaswidget.h"
+#include "board.h"
 
 
 class MainWindow : public QMainWindow
@@ -14,7 +19,10 @@ public:
 //    ~MainWindow();
 
 private:
-    QLabel *helloLabel;
+    CanvasWidget* canvas;
+    QMenuBar* menuBar;
+
+    QAction* resetAction;
 };
 
 #endif // MAINWINDOW_H
