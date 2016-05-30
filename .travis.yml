@@ -10,6 +10,7 @@ addons:
             - qtdeclarative5-dev
             - libqt5webkit5-dev
             - libsqlite3-dev
+            - libqt5opengl5-dev
 
 script:
     - qmake -qt=qt5 -v
