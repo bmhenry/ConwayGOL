@@ -4,7 +4,7 @@ dist: trusty
 
 addons:
     apt:
-	sources:
+	souces:
 	    - ubuntu-sdk-team
         packages:
             - qt5-qmake
