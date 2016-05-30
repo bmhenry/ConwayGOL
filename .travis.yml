@@ -13,5 +13,6 @@ addons:
             - libqt5opengl5-dev
 
 script:
+    - qmake -qt=qt5 -v
     - qmake -qt=qt5
     - make
