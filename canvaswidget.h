@@ -6,7 +6,10 @@
 #include "gamelogic.h"
 
 
-
+/*
+ * CanvasWidget:
+ *   Handles calls to GameLogic and drawing as a OpenGLWidget
+ */
 class CanvasWidget : public QOpenGLWidget
 {
     Q_OBJECT

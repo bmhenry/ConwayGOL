@@ -1,19 +1,11 @@
 #ifndef BOARD_H
 #define BOARD_H
 
-//class Board;
 
-//class BoardHelper
-//{
-//private:
-//    Board* parent;
-//    int first;
-
-//public:
-//    BoardHelper(Board* parent, int first);
-//    int &operator[](int second);
-//};
-
+/*
+ * Board:
+ *   Gameboard only, with no internal game logic
+ */
 class Board
 {
 public:

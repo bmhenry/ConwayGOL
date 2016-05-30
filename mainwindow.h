@@ -10,6 +10,10 @@
 #include "board.h"
 
 
+/*
+ * MainWindow:
+ *   Main display window for the Qt app
+ */
 class MainWindow : public QMainWindow
 {
     Q_OBJECT

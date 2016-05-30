@@ -6,20 +6,19 @@
 GameLogic::GameLogic(int rows, int columns, int time, QObject* parent)
     : QObject(parent), rows(rows), columns(columns)
 {
-    qDebug() << "rows: " << this->rows << "  cols: " << this->columns;
-    randomPercentage = 7;
+    // set avg percentage of the cells that should be 'live' when board is reset
+    randomPercentage = 5;
 
+    // create repeating timer for length of each game generation
     timer = new QTimer();
     timer->setInterval(time);
     timer->setSingleShot(false);
 
+    // initialize pseudo-random generator
     qsrand(QTime::currentTime().msec());
 
     board = new Board(rows, columns);
     resetBoard();
-
-    // TODO: method to initialize a map of the cells for which
-    // start alive
 
     connect(timer, SIGNAL(timeout()), this, SLOT(timerEvent()));
 
@@ -28,32 +27,24 @@ GameLogic::GameLogic(int rows, int columns, int time, QObject* parent)
 
 GameLogic::~GameLogic() {
     delete board;
-    // delete tempBoard; holds nothing
     delete timer;
 }
 
 void GameLogic::resetBoard() {
+    // resets the game board randomly
+
     int random;
 
     for (int i = 0; i < rows; ++i) {
         for (int j = 0; j < columns; ++j) {
-            random = qrand() % 100;
+            random = qrand() % 100; // get pseudo-random value from qrand
 
             if (random < randomPercentage)
-                board->set(i, j, 1);
+                board->set(i, j, 1); // cell is live
             else
-                board->set(i, j, 0);
+                board->set(i, j, 0); // cell is dead
         }
     }
-//    board->set(5, 5, 1);
-//    board->set(5, 6, 1);
-//    board->set(5, 7, 1);
-//    board->set(3, 6, 1);
-
-//    board->set(7, 5, 1);
-//    board->set(7, 6, 1);
-//    board->set(7, 7, 1);
-//    board->set(9, 6, 1);
 }
 
 void GameLogic::timerEvent() {
@@ -68,6 +59,7 @@ void GameLogic::timerEvent() {
             ln = getLiveNeighbors(r, c);
             cell = board->get(r, c);
 
+            // implement game rules for life and death
             if (cell == 1) {
                 if (ln < 2 or ln > 3)
                     tempBoard->set(r, c, 0);
@@ -81,16 +73,16 @@ void GameLogic::timerEvent() {
         }
     }
 
-//    Board* transfer = board;
-//    board = tempBoard;
-//    tempBoard = transfer;
     delete board;
     board = tempBoard;
 
+    // tell CanvasWidget to repaint
     emit gameUpdate(board);
 }
 
 int GameLogic::getLiveNeighbors(int row, int column) {
+    // gets the number of live neighbors a cell has
+
     int liveCounter = 0;
 
     // left side

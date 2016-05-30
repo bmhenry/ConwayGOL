@@ -4,14 +4,11 @@
 Board::Board(int rows, int columns)
     : row_count(rows), col_count(columns)
 {
-    qDebug() << rows << " " << columns;
     // create rows
     cells = new int*[row_count];
 
     if (row_count)
     {
-        // create memory for the rows
-
         // create column members in each row
         for (int i = 0; i < row_count; ++i) {
             cells[i] = new int[col_count];
@@ -19,11 +16,10 @@ Board::Board(int rows, int columns)
                 cells[i][j] = 0;
         }
     }
-
-    qDebug() << cells[row_count - 1][col_count - 1];
 }
 
 Board::~Board() {
+    // delete each row, then the whole matrix
     if (row_count and col_count)
         for (int i = 0; i < row_count; ++i)
             delete[] cells[i];
@@ -32,6 +28,7 @@ Board::~Board() {
 }
 
 int Board::get(int first, int second) {
+    // provide wrap-around for the board edges
     if (first >= row_count)
         first -= row_count;
     else if (first < 0)
@@ -46,6 +43,7 @@ int Board::get(int first, int second) {
 }
 
 void Board::set(int first, int second, int value) {
+    // provide wrap-around for the board edges
     if (first > row_count)
         first -= row_count;
     else if (first < 0)
@@ -58,14 +56,3 @@ void Board::set(int first, int second, int value) {
 
     cells[first][second] = value;
 }
-
-//BoardHelper Board::operator[](int first) {
-//    return BoardHelper(this, first);
-//}
-
-//BoardHelper::BoardHelper(Board *parent, int first)
-//    : parent(parent), first(first){}
-
-//int& BoardHelper::operator[](int second) {
-//    return parent->get(first, second);
-//}

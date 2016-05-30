@@ -7,6 +7,10 @@
 #include "board.h"
 
 
+/*
+ * GameLogic:
+ *   Contains all necessary logic for Conway's Game of Life
+ */
 class GameLogic : public QObject
 {
     Q_OBJECT
