@@ -1,8 +1,10 @@
 #include "board.h"
+#include <QDebug>
 
 Board::Board(int rows, int columns)
     : row_count(rows), col_count(columns)
 {
+    qDebug() << rows << " " << columns;
     // create rows
     cells = new int*[row_count];
 
@@ -17,10 +19,12 @@ Board::Board(int rows, int columns)
                 cells[i][j] = 0;
         }
     }
+
+    qDebug() << cells[row_count - 1][col_count - 1];
 }
 
 Board::~Board() {
-    if (row_count)
+    if (row_count and col_count)
         for (int i = 0; i < row_count; ++i)
             delete[] cells[i];
 

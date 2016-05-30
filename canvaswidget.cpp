@@ -6,14 +6,15 @@
 //#include <QMatrix>
 
 
-CanvasWidget::CanvasWidget(QWidget* parent)
+CanvasWidget::CanvasWidget(int width, int height, QWidget* parent)
     : QOpenGLWidget(parent), board(NULL)
 {
-    this->setFixedSize(parent->size());
+    this->setFixedSize(width, height);
 
     sq_width = 5;
+    int time = 500;
 
-    logic = new GameLogic(this->height()/sq_width, this->width()/sq_width);
+    logic = new GameLogic(width/sq_width, height/sq_width, time);
     connect(logic, SIGNAL(gameUpdate(Board*)), this, SLOT(updateCanvas(Board*)));
 }
 
@@ -43,21 +44,17 @@ void CanvasWidget::paintEvent(QPaintEvent *) {
 
     QPainter painter(this);
     int cell;
-    Qt::GlobalColor color;
-    painter.setPen(Qt::white);
-    painter.setBackground(Qt::black);
+
+    painter.fillRect(0, 0, this->width(), this->height(), Qt::white);
 
 
     for (int row = 0; row < board->row_count; row++) {
         for (int col = 0; col < board->col_count; col++) {
             cell = board->get(row, col);
             if (cell == 1)
-                color = Qt::black;
-            else if (cell == 0)
-                color = Qt::white;
-            else
-                qDebug() << cell;
-            painter.fillRect(row*sq_width, col*sq_width, sq_width, sq_width, color);
+                painter.fillRect(row*sq_width, col*sq_width, sq_width, sq_width, Qt::black);
+            else if (cell != 0)
+                qDebug() << "Cell not 1 or 0: (" << row << "," << col << ") = " << cell;
         }
     }
 }

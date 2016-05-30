@@ -12,7 +12,7 @@ class CanvasWidget : public QOpenGLWidget
     Q_OBJECT
 
 public:
-    explicit CanvasWidget(QWidget* parent = 0);
+    explicit CanvasWidget(int width, int height ,QWidget* parent = 0);
     ~CanvasWidget();
 
     void drawGrid(int rows = 0, int columns = 0);

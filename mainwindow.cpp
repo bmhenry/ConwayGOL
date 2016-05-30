@@ -15,19 +15,21 @@ MainWindow::MainWindow(QWidget *parent)
     resetAction = menuBar->addAction("Reset");
     this->setMenuBar(menuBar);
 
-    this->setFixedSize(400, 400 + menuBar->height());
+    int x = 1200;
+    int y = 800;
+    this->setFixedSize(x, y + menuBar->height());
 
     QWidget *w = new QWidget(this);
-    w->setFixedSize(this->width(), this->height() - menuBar->height());
+    w->setFixedSize(x, y);
     this->setCentralWidget(w);
 
     QVBoxLayout *mainLayout = new QVBoxLayout(w);
     mainLayout->setContentsMargins(0, 0, 0, 0);
     QWidget* spacer = new QWidget(this);
-    spacer->resize(this->width(), menuBar->height());
+    spacer->resize(x, menuBar->height());
     mainLayout->addWidget(spacer);
 
-    canvas = new CanvasWidget(w);
+    canvas = new CanvasWidget(x, y, w);
     mainLayout->addWidget(canvas);
 
     connect(resetAction, SIGNAL(triggered(bool)), canvas, SLOT(resetCanvas()));

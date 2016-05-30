@@ -6,6 +6,7 @@
 GameLogic::GameLogic(int rows, int columns, int time, QObject* parent)
     : QObject(parent), rows(rows), columns(columns)
 {
+    qDebug() << "rows: " << this->rows << "  cols: " << this->columns;
     randomPercentage = 7;
 
     timer = new QTimer();
@@ -27,7 +28,7 @@ GameLogic::GameLogic(int rows, int columns, int time, QObject* parent)
 
 GameLogic::~GameLogic() {
     delete board;
-    delete tempBoard;
+    // delete tempBoard; holds nothing
     delete timer;
 }
 
